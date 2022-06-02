@@ -9,7 +9,7 @@ import torch
 from streamlit_chat import message
 import os
 
-st.write(os.getcwd())
+#st.write(os.getcwd())
 
 st.title("감정 모델 기반의 챗봇 서비스👾")
     
@@ -26,11 +26,22 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = []
 
+@st.cache
+def get_obj_det_model_Drive():
+    with st.spinner("Downloading object detection model... this may take a while! \n Don't stop it!"):
+        download_file_from_google_drive('1-EqYjXiygYvJkT6_4peMEN77apMODYA7', "KoGPT2Chatbot.pth")
+
+    #model = torch.load(f_checkpoint, map_location=device)
+    model = GPT2LMHeadModel.load_state_dict(torch.load("KoGPT2Chatbot.pth"))
+    model.eval()
+    return model
+
 if user_input:
     tokenizer = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",
       bos_token='</s>', eos_token='</s>', unk_token='<unk>',
       pad_token='<pad>', mask_token='<mask>')
-    model = GPT2LMHeadModel.load_state_dict(torch.load("/app/chatbot/KoGPT2Chatbot.pth"))
+    #model = GPT2LMHeadModel.load_state_dict(torch.load("/app/chatbot/KoGPT2Chatbot.pth"))
+    model = get_obj_det_model_Drive()
 
     with torch.no_grad():
         new_user_input_ids = tokenizer.encode(user_input + tokenizer.eos_token, return_tensors='pt')

@@ -8,8 +8,22 @@ from transformers import GPT2LMHeadModel
 import torch
 from streamlit_chat import message
 import os
-from GD_download import download_file_from_google_drive
+import requests
 
+def download_file_from_google_drive(id, destination):
+    URL = "https://docs.google.com/uc?export=download"
+
+    session = requests.Session()
+
+    response = session.get(URL, params = { 'id' : id }, stream = True)
+    token = get_confirm_token(response)
+
+    if token:
+        params = { 'id' : id, 'confirm' : token }
+        response = session.get(URL, params = params, stream = True)
+
+    save_response_content(response, destination)    
+    
 #st.write(os.getcwd())
 
 st.title("감정 모델 기반의 챗봇 서비스👾")
@@ -27,6 +41,7 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = []
 
+    
 @st.cache
 def get_obj_det_model_Drive():
     with st.spinner("Downloading object detection model... this may take a while! \n Don't stop it!"):

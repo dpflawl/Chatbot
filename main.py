@@ -7,8 +7,9 @@ import pandas as pd
 from transformers import GPT2LMHeadModel
 import torch
 from streamlit_chat import message
-import joblib
+import os
 
+#st.write(os.getcwd())
 
 st.title("감정 모델 기반의 챗봇 서비스👾")
     
@@ -29,9 +30,7 @@ if user_input:
     tokenizer = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",
       bos_token='</s>', eos_token='</s>', unk_token='<unk>',
       pad_token='<pad>', mask_token='<mask>')
-    #model = GPT2LMHeadModel
-    #model.load_state_dict(torch.load("/app/Chatbot/KoGPT2Chatbot.pkl"))
-    model = joblib.load("KoGPT2Chatbot.pkl")
+    model = GPT2LMHeadModel.load_state_dict(torch.load("/app/chatbot/KoGPT2Chatbot.pt"), strict=False)
 
     with torch.no_grad():
         new_user_input_ids = tokenizer.encode(user_input + tokenizer.eos_token, return_tensors='pt')

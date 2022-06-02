@@ -10,34 +10,6 @@ from streamlit_chat import message
 import os
 import requests
 
-def download_file_from_google_drive(id, destination):
-    URL = "https://docs.google.com/uc?export=download"
-
-    session = requests.Session()
-
-    response = session.get(URL, params = { 'id' : id }, stream = True)
-    token = get_confirm_token(response)
-
-    if token:
-        params = { 'id' : id, 'confirm' : token }
-        response = session.get(URL, params = params, stream = True)
-
-    save_response_content(response, destination)    
-
-def get_confirm_token(response):
-    for key, value in response.cookies.items():
-        if key.startswith('download_warning'):
-            return value
-
-    return None
-
-def save_response_content(response, destination):
-    CHUNK_SIZE = 32768
-
-    with open(destination, "wb") as f:
-        for chunk in response.iter_content(CHUNK_SIZE):
-            if chunk: # filter out keep-alive new chunks
-                f.write(chunk)
                 
 #st.write(os.getcwd())
 
@@ -59,13 +31,11 @@ if 'past' not in st.session_state:
     
 @st.cache
 def get_obj_det_model_Drive():
-    with st.spinner("Downloading object detection model... this may take a while! \n Don't stop it!"):
-        download_file_from_google_drive('1-EqYjXiygYvJkT6_4peMEN77apMODYA7', "KoGPT2Chatbot.pth")
-
     #model = torch.load(f_checkpoint, map_location=device)
-    model = GPT2LMHeadModel.load_state_dict(torch.load("KoGPT2Chatbot.pth"))
+    model = GPT2LMHeadModel.load_state_dict(torch.load("/content/drive/MyDrive/KoGPT2-chatbot/KoGPT2Chatbot.pth"))
     model.eval()
     return model
+
 
 if user_input:
     tokenizer = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",

@@ -30,7 +30,7 @@ if user_input:
     tokenizer = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",
       bos_token='</s>', eos_token='</s>', unk_token='<unk>',
       pad_token='<pad>', mask_token='<mask>')
-    model = GPT2LMHeadModel.load_state_dict(torch.load("/app/chatbot/KoGPT2Chatbot.pth"), strict=False)
+    model = GPT2LMHeadModel.load_state_dict(torch.load("/app/chatbot/KoGPT2Chatbot.pth"))
 
     with torch.no_grad():
         new_user_input_ids = tokenizer.encode(user_input + tokenizer.eos_token, return_tensors='pt')

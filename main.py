@@ -28,7 +28,7 @@ if user_input:
     tokenizer = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",
       bos_token='</s>', eos_token='</s>', unk_token='<unk>',
       pad_token='<pad>', mask_token='<mask>')
-    model = GPT2LMHeadModel(config)
+    model = GPT2LMHeadModel
     model.load_state_dict("/app/Chatbot/KoGPT2Chatbot.pkl")
 
     with torch.no_grad():

@@ -31,7 +31,7 @@ if user_input:
       pad_token='<pad>', mask_token='<mask>')
     #model = GPT2LMHeadModel
     #model.load_state_dict(torch.load("/app/Chatbot/KoGPT2Chatbot.pkl"))
-    model = joblib.load("/app/Chatbot/KoGPT2Chatbot.pkl")
+    model = joblib.load("/Chatbot/KoGPT2Chatbot.pkl")
 
     with torch.no_grad():
         new_user_input_ids = tokenizer.encode(user_input + tokenizer.eos_token, return_tensors='pt')

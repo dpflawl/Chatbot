@@ -3,5 +3,6 @@ streamlit-chat==0.0.2.1
 torch==1.11.0
 pyarrow
 pandas
+gdown
 transformers==4.17.0
 protobuf~=3.19.0

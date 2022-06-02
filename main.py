@@ -9,7 +9,7 @@ import torch
 from streamlit_chat import message
 import os
 
-#st.write(os.getcwd())
+st.write(os.getcwd())
 
 st.title("감정 모델 기반의 챗봇 서비스👾")
     

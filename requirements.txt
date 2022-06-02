@@ -4,5 +4,6 @@ torch==1.11.0
 pyarrow
 pandas
 gdown
+download_file_from_google_drive
 transformers==4.17.0
 protobuf~=3.19.0

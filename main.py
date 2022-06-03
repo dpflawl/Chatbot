@@ -15,7 +15,8 @@ from pytorch_lightning import LightningModule
                 
 #st.write(os.getcwd())
 
-st.title("감정을 분석하고 위로해주는 챗봇👾")
+st.title("'위로봇👾'과 대화를 나눠보세요.")
+st.header("'위로봇'은 대화에서 감정을 분석하고 이모티콘을 함께 사용하여 감정적인 공감과 위로를 해주는 챗봇입니다.")
 
 def get_text():
     input_text = st.text_input("You: ","안녕?", key="input")

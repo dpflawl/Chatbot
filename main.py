@@ -69,7 +69,6 @@ def get_obj_det_model_Drive():
     
     if not f_checkpoint.exists():
         with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
-            from GD_download import download_file_from_google_drive
             download_file_from_google_drive(cloud_model_location, f_checkpoint)
             
     #model = torch.load(f_checkpoint, map_location=device)

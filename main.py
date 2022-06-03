@@ -71,7 +71,7 @@ def get_obj_det_model_Drive():
         with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
             download_file_from_google_drive(cloud_model_location, f_checkpoint)
     
-    config = GPT2Config(vocab_size=50257)
+    config = GPT2Config()
     #config = GPT2Config()
     #config.pad_token_id = tokenizer.token_to_id('<pad>')
 
@@ -90,8 +90,8 @@ def get_obj_det_model_Drive():
 
 if user_input:
     tokenizer = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",
-      bos_token='</s>', eos_token='</s>', unk_token='<unk>',
-      pad_token='<pad>', mask_token='<mask>')
+      bos_token='</s>', eos_token='</s>', unk_token='<usr>',
+      pad_token='<pad>', mask_token='<unused0>')
     #model = GPT2LMHeadModel.load_state_dict(torch.load("/app/chatbot/KoGPT2Chatbot.pth"))
     model = get_obj_det_model_Drive()
 

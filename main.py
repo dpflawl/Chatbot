@@ -95,8 +95,8 @@ def get_obj_det_model_Drive():
 
 if user_input:
     tokenizer = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",
-      bos_token='</s>', eos_token='</s>', unk_token='<usr>',
-      pad_token='<pad>', mask_token='<unused0>')
+      bos_token='</s>', eos_token='</s>', unk_token='<unk>',
+      pad_token='<pad>', mask_token='<mask>')
     #model = GPT2LMHeadModel.load_state_dict(torch.load("/app/chatbot/KoGPT2Chatbot.pth"))
     model = get_obj_det_model_Drive()
 
@@ -104,13 +104,12 @@ if user_input:
         new_user_input_ids = tokenizer.encode(user_input + tokenizer.eos_token, return_tensors='pt')
         bot_input_ids = torch.cat([st.session_state.chat_history_ids, new_user_input_ids], dim=-1) if 'past' not in st.session_state else new_user_input_ids
         #st.session_state.chat_history_ids = model.generate(bot_input_ids,
-        #                                                    max_length=128,
-        #                                                    repetition_penalty=2.0,
-        #                                                    pad_token_id=tokenizer.pad_token_id,
-        #                                                    eos_token_id=tokenizer.eos_token_id,
-        #                                                    bos_token_id=tokenizer.bos_token_id,
-        #                                                    use_cache=True)
-        st.session_state.chat_history_ids = model(bot_input_ids, return_dict=True)
+                                                            max_length=128,
+                                                            repetition_penalty=2.0,
+                                                            pad_token_id=tokenizer.pad_token_id,
+                                                            eos_token_id=tokenizer.eos_token_id,
+                                                            bos_token_id=tokenizer.bos_token_id,
+                                                            use_cache=True)
         response = tokenizer.decode(st.session_state.chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True)       
         st.session_state.past.append(user_input)
         st.session_state.generated.append(response)

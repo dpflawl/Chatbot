@@ -66,8 +66,8 @@ def save_response_content(response, destination):
 def get_obj_det_model_Drive():
     # cloud_model_location = "1-EqYjXiygYvJkT6_4peMEN77apMODYA7"
     # f_checkpoint = Path("KoGPT2Chatbot.pth")    
-    cloud_model_location = "1-71f6Pfl4_38DK46tfq7UOaGkuaRIhNI"
-    f_checkpoint = Path("KoGPT2ChatBot.pt")
+    cloud_model_location = "1-AY6LRclayVIwDiWPqlZZScgYCwPPveI"
+    f_checkpoint = Path("KoGPT2ChatBot.pth")
     
     if not f_checkpoint.exists():
         with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):

@@ -76,13 +76,14 @@ def get_obj_det_model_Drive():
     #config.pad_token_id = tokenizer.token_to_id('<pad>')
 
     model = GPT2LMHeadModel(config)
+    model_state_dict = model.state_dict()
     checkpoint = torch.load(f_checkpoint)
     for key in list(checkpoint.keys()):
       if 'kogpt2.' in key:
           checkpoint[key.replace('kogpt2.', '')] = checkpoint[key]
-          #if key == "kogpt2.transformer.wte.weight" or key == "kogpt2.lm_head.weight":
-          #  
-          #del checkpoint[key]
+          if key == "kogpt2.transformer.wte.weight" or key == "kogpt2.lm_head.weight":
+            checkpoint[key] = model_state_dict[key]
+          del checkpoint[key]
                 
     model.load_state_dict(checkpoint, strict=False)
     #model.load_state_dict(f_checkpoint, strict=False)

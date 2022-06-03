@@ -123,7 +123,7 @@ if user_input:
 
     with torch.no_grad():
         #new_user_input_ids = tokenizer.encode(user_input + tokenizer.eos_token, return_tensors='pt')
-        new_user_input_ids = tokenizer.encode(unk_token + user_input + tokenizer.eos_token, return_tensors='pt')
+        new_user_input_ids = tokenizer.encode(tokenizer.unk_token + user_input + tokenizer.eos_token, return_tensors='pt')
         #tok.encode(U_TKN + q + SENT + sent + S_TKN + a)
         bot_input_ids = torch.cat([st.session_state.chat_history_ids, new_user_input_ids], dim=-1) if 'past' not in st.session_state else new_user_input_ids
         st.session_state.chat_history_ids = model.generate(bot_input_ids,

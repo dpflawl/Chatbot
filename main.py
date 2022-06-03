@@ -83,7 +83,7 @@ def get_obj_det_model_Drive():
     for key in list(checkpoint.keys()):
       if 'kogpt2.' in key:
           checkpoint[key.replace('kogpt2.', '')] = checkpoint[key]
-          #del checkpoint[key]
+          del checkpoint[key]
     for key in list(checkpoint.keys()):     
       torch.reshape(checkpoint[key], torch.Size([model_state_dict[key].shape]))
                 

@@ -81,7 +81,7 @@ def get_obj_det_model_Drive():
       if 'kogpt2.' in key:
           if key == "kogpt2.transformer.wte.weight" or key == "kogpt2.lm_head.weight":
             pname = key
-            pval = m[key]
+            pval = checkpoint[key]
             checkpoint[pname] = pval.clone()
           else:
             checkpoint[key.replace('kogpt2.', '')] = checkpoint[key]

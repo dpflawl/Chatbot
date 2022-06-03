@@ -80,7 +80,7 @@ def get_obj_det_model_Drive():
     model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
     model_state_dict = model.state_dict()
     ###checkpoint = torch.load(f_checkpoint)
-    checkpoint = f_checkpoint
+    checkpoint = f_checkpoint['model_state_dict']
     
     for key in list(checkpoint.keys()):
       if 'kogpt2.' in key:

@@ -17,7 +17,12 @@ from pytorch_lightning import LightningModule
 
 st.title("감정 모델 기반의 챗봇 서비스👾")
 
-user_input = st.text_input("You: ","안녕?", key="input")
+def get_text():
+    input_text = st.text_input("You: ","안녕?", key="input")
+    return input_text 
+
+#input = st.text_input('입력:')
+use_input = get_text()
 
 if 'generated' not in st.session_state:
     st.session_state['generated'] = []

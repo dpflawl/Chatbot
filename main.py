@@ -79,13 +79,11 @@ def get_obj_det_model_Drive():
     #config.pad_token_id = tokenizer.token_to_id('<pad>')
 
     ##model = GPT2LMHeadModel(config)
-    model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')   
-    model_state_dict = model.state_dict()
-    ckpt = torch.load(f_checkpoint)
-    print(ckpt.keys())
+    ###model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')   
+    ###model_state_dict = model.state_dict()
     
     class KoGPT2Chat(LightningModule):
-      def __init__(self, hparams, **kwargs):
+      def __init__(self):
           super(KoGPT2Chat, self).__init__()
           self.kogpt2 = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
@@ -93,13 +91,12 @@ def get_obj_det_model_Drive():
     #checkpoint = model.state_dict()
     #ckpt = torch.load(f_checkpoint)
     #print(ckpt.keys())
-    
+    '''
     i=0
     for k, _ in model_state_dict.items():
         model_state_dict[k] = checkpoint[i][1]
         i += 1
     
-    '''
     for key in list(checkpoint.keys()):
       if 'kogpt2.' in key:
           checkpoint[key.replace('kogpt2.', '')] = checkpoint[key]
@@ -107,7 +104,7 @@ def get_obj_det_model_Drive():
     #for key in list(checkpoint.keys()):     
     #  torch.reshape(checkpoint[key], (model_state_dict[key].shape[0], model_state_dict[key].shape[1]))     
     '''  
-    model.load_state_dict(model_state_dict)
+    ###model.load_state_dict(model_state_dict)
     #model.load_state_dict(f_checkpoint, strict=False)
     #model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint))
     

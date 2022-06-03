@@ -71,14 +71,15 @@ def get_obj_det_model_Drive():
         with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
             download_file_from_google_drive(cloud_model_location, f_checkpoint)
     
-    config = GPT2Config()
+    ##config = GPT2Config()
     #config = GPT2Config()
     #config.pad_token_id = tokenizer.token_to_id('<pad>')
 
-    #model = GPT2LMHeadModel(config)
+    ##model = GPT2LMHeadModel(config)
     model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
-    model_state_dict = model.state_dict()
+    ##model_state_dict = model.state_dict()
     checkpoint = torch.load(f_checkpoint)
+    
     for key in list(checkpoint.keys()):
       if 'kogpt2.' in key:
           checkpoint[key.replace('kogpt2.', '')] = checkpoint[key]

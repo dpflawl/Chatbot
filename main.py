@@ -98,6 +98,7 @@ def get_obj_det_model_Drive():
         model_state_dict[k] = checkpoint[i][1]
         i += 1
     '''
+    checkpoint = torch.load(f_checkpoint)
     for key in list(checkpoint.keys()):
       if 'kogpt2.' in key:
           checkpoint[key.replace('kogpt2.', '')] = checkpoint[key]

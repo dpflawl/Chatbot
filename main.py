@@ -17,10 +17,7 @@ from pytorch_lightning import LightningModule
 
 st.title("감정 모델 기반의 챗봇 서비스👾")
 
-form = st.form(key='my_form')
 user_input = st.text_input("You: ","안녕?", key="input")
-send_button = form.form_submit_button("전송")
-
 
 if 'generated' not in st.session_state:
     st.session_state['generated'] = []
@@ -120,7 +117,7 @@ def get_obj_det_model_Drive():
     return model
 
 
-if send_button:
+if user_input:
     st.session_state["input"] = ""
     tokenizer = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",
       bos_token='</s>', eos_token='</s>', unk_token='<unk>',

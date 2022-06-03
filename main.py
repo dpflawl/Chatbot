@@ -78,8 +78,7 @@ def get_obj_det_model_Drive():
 
     ##model = GPT2LMHeadModel(config)
     model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
-    checkpoint = torch.load(f_checkpoint)
-    model.load_state_dict(checkpoint['model'])
+    model = model.load_from_checkpoint(checkpoint_path="example.ckpt")
     model_state_dict = model.state_dict()
     '''
     checkpoint = torch.load(f_checkpoint)

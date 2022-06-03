@@ -4,7 +4,7 @@ import transformers
 from transformers import PreTrainedTokenizerFast
 import pandas as pd
 #from transformers import AutoModelForCausalLM, AutoTokenizer
-from transformers import GPT2LMHeadModel
+from transformers import GPT2Config, GPT2LMHeadModel
 import torch
 from streamlit_chat import message
 import os

@@ -64,8 +64,8 @@ def save_response_content(response, destination):
                 
 @st.cache
 def get_obj_det_model_Drive():
-    cloud_model_location = "1-EqYjXiygYvJkT6_4peMEN77apMODYA7"
-    f_checkpoint = Path("KoGPT2Chatbot.pth")
+    cloud_model_location = "1-B2WVmpkr2fOuzbLBDVMOUGrUs7J5PCh"
+    f_checkpoint = Path("KoGPT2Chatbot.pt")
     
     if not f_checkpoint.exists():
         with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
@@ -73,7 +73,7 @@ def get_obj_det_model_Drive():
             download_file_from_google_drive(cloud_model_location, f_checkpoint)
             
     #model = torch.load(f_checkpoint, map_location=device)
-    model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint['model_G_state_dict']))
+    model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint))
     model.eval()
     return model
 

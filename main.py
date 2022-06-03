@@ -76,9 +76,9 @@ def get_obj_det_model_Drive():
     #config.pad_token_id = tokenizer.token_to_id('<pad>')
 
     model = GPT2LMHeadModel(config)
-    model.load_state_dict(torch.load(f_checkpoint))
+    model.load_state_dict(torch.load(f_checkpoint['state_dict']))
     #model.load_state_dict(f_checkpoint, strict=False)
-    #model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint)['state_dict'])
+    #model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint))
     model.eval()
     return model
 

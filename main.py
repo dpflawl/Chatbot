@@ -67,7 +67,7 @@ def get_obj_det_model_Drive():
     # cloud_model_location = "1-EqYjXiygYvJkT6_4peMEN77apMODYA7"
     # f_checkpoint = Path("KoGPT2Chatbot.pth")    
     
-    cloud_model_location = "1-Ac0-8C39RFU2VOod1Y6BKPZCKQgR4e4" #kogpt module
+    cloud_model_location = "1-DbUxDJROKYSDK-ltSouwnvVGCKOQJto" #kogpt module
     f_checkpoint = Path("KoGPT2ChatBot.pth")
     #cloud_model_location = "1-A_prlbano0stKVdo4l1QjIk0LUiU5NZ"
     #f_checkpoint = Path("KoGPT2ChatBot.pt")

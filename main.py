@@ -9,6 +9,7 @@ import torch
 from streamlit_chat import message
 import os
 import requests
+from pathlib import Path
 
                 
 #st.write(os.getcwd())
@@ -28,14 +29,48 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = []
 
+    
+import requests
+
+def download_file_from_google_drive(id, destination):
+    URL = "https://docs.google.com/uc?export=download"
+
+    session = requests.Session()
+
+    response = session.get(URL, params = { 'id' : id }, stream = True)
+    token = get_confirm_token(response)
+
+    if token:
+        params = { 'id' : id, 'confirm' : token }
+        response = session.get(URL, params = params, stream = True)
+
+    save_response_content(response, destination)    
+
+def get_confirm_token(response):
+    for key, value in response.cookies.items():
+        if key.startswith('download_warning'):
+            return value
+
+    return None
+
+def save_response_content(response, destination):
+    CHUNK_SIZE = 32768
+
+    with open(destination, "wb") as f:
+        for chunk in response.iter_content(CHUNK_SIZE):
+            if chunk: # filter out keep-alive new chunks
+                f.write(chunk)
+
+                
 @st.cache
 def get_obj_det_model_Drive():
-    f_checkpoint = Path("/app/chatbot/KoGPT2Chatbot.pth")
+    cloud_model_location = "1-EqYjXiygYvJkT6_4peMEN77apMODYA7"
+    f_checkpoint = Path("KoGPT2Chatbot.pth")
     
     if not f_checkpoint.exists():
         with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
             from GD_download import download_file_from_google_drive
-            download_file_from_google_drive("https://drive.google.com/file/d/1-EqYjXiygYvJkT6_4peMEN77apMODYA7/view?usp=sharing", "KoGPT2Chatbot.pth")
+            download_file_from_google_drive(cloud_model_location, f_checkpoint)
             
     #model = torch.load(f_checkpoint, map_location=device)
     model = GPT2LMHeadModel.load_state_dict(torch.load(my_file))

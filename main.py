@@ -81,19 +81,20 @@ def get_obj_det_model_Drive():
     ##model = GPT2LMHeadModel(config)
     model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')   
     model_state_dict = model.state_dict()
-    checkpoint = list(f_checkpoint.items())
-    
-    i=0
-    for k, _ in model_state_dict.items():
-        model_state_dict[k] = checkpoint[i][1]
-        i += 1
     
     class KoGPT2Chat(LightningModule):
       def __init__(self, hparams, **kwargs):
           super(KoGPT2Chat, self).__init__()
           self.kogpt2 = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
-    #model = KoGPT2Chat.load_from_checkpoint(checkpoint)
+    model = KoGPT2Chat.load_from_checkpoint(f_checkpoint)    
+    checkpoint = model.state_dict()
+    
+    i=0
+    for k, _ in model_state_dict.items():
+        model_state_dict[k] = checkpoint[i][1]
+        i += 1
+    
     '''
     for key in list(checkpoint.keys()):
       if 'kogpt2.' in key:

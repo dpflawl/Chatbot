@@ -85,7 +85,7 @@ def get_obj_det_model_Drive():
           super(KoGPT2Chat, self).__init__()
           self.kogpt2 = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
-    model = KoGPT2Chat.load_from_checkpoint(checkpoint_path=f_checkpoint).kogpt2
+    model = KoGPT2Chat.load_from_checkpoint(f_checkpoint)
     '''
     model_state_dict = model.state_dict()
     #checkpoint = torch.load(f_checkpoint)

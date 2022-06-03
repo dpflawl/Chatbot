@@ -80,8 +80,11 @@ def get_obj_det_model_Drive():
     for key in list(checkpoint.keys()):
       if 'kogpt2.' in key:
           if key == "kogpt2.transformer.wte.weight" or key == "kogpt2.lm_head.weight":
-            pass
-          checkpoint[key.replace('kogpt2.', '')] = checkpoint[key]
+            pname = key
+            pval = m[key]
+            checkpoint[pname] = pval.clone()
+          else:
+            checkpoint[key.replace('kogpt2.', '')] = checkpoint[key]
           del checkpoint[key]
                 
     model.load_state_dict(checkpoint)

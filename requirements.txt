@@ -4,6 +4,6 @@ torch==1.11.0
 pyarrow
 pandas
 gdown
-LightningModule
+pytorch_lightning
 transformers==4.17.0
 protobuf~=3.19.0

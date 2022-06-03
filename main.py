@@ -18,7 +18,7 @@ from pytorch_lightning import LightningModule
 st.title("감정 모델 기반의 챗봇 서비스👾")
     
 user_input = st.text_input("You: ","안녕?", key="input")
-send_button = st.button("✔", on_click=clear_text)
+send_button = st.button("✔")
 
 
 if 'generated' not in st.session_state:

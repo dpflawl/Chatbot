@@ -66,44 +66,45 @@ def save_response_content(response, destination):
                 
 @st.cache
 def get_obj_det_model_Drive():
-    # cloud_model_location = "1-EqYjXiygYvJkT6_4peMEN77apMODYA7"
-    # f_checkpoint = Path("KoGPT2Chatbot.pth")        
-    cloud_model_location = "17jWPP5pbhj67RqIuzIbuBnOznTgG2STy"
-    f_checkpoint = Path("model_-last.ckpt")
+    cloud_model_location = "1-EqYjXiygYvJkT6_4peMEN77apMODYA7"
+    f_checkpoint = Path("KoGPT2Chatbot.pth")        
+    # cloud_model_location = "17jWPP5pbhj67RqIuzIbuBnOznTgG2STy"
+    # f_checkpoint = Path("model_-last.ckpt")
     
     if not f_checkpoint.exists():
         with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
             download_file_from_google_drive(cloud_model_location, f_checkpoint)
     
-    config = GPT2Config()
+    #config = GPT2Config()
     #config.pad_token_id = tokenizer.token_to_id('<pad>')
 
     ##model = GPT2LMHeadModel(config)
-    ###model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')   
+    model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')   
     ###model_state_dict = model.state_dict()
-    
+    '''
     class KoGPT2Chat(LightningModule):
       def __init__(self):
           super(KoGPT2Chat, self).__init__()
           self.kogpt2 = GPT2LMHeadModel(config)
 
-    model = KoGPT2Chat.load_from_checkpoint(f_checkpoint)    
+    model = KoGPT2Chat.load_from_checkpoint(f_checkpoint)
     #checkpoint = model.state_dict()
     #ckpt = torch.load(f_checkpoint)
     #print(ckpt.keys())
+    '''
     '''
     i=0
     for k, _ in model_state_dict.items():
         model_state_dict[k] = checkpoint[i][1]
         i += 1
-    
+    '''
     for key in list(checkpoint.keys()):
       if 'kogpt2.' in key:
           checkpoint[key.replace('kogpt2.', '')] = checkpoint[key]
           del checkpoint[key]
     #for key in list(checkpoint.keys()):     
     #  torch.reshape(checkpoint[key], (model_state_dict[key].shape[0], model_state_dict[key].shape[1]))     
-    '''  
+
     ###model.load_state_dict(model_state_dict)
     #model.load_state_dict(f_checkpoint, strict=False)
     #model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint))

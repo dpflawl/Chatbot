@@ -72,7 +72,7 @@ def get_obj_det_model_Drive():
             download_file_from_google_drive(cloud_model_location, f_checkpoint)
             
     #model = torch.load(f_checkpoint, map_location=device)
-    model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint))
+    model = GPT2LMHeadModel.load_state_dict(f_checkpoint)
     model.eval()
     return model
 

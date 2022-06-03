@@ -75,7 +75,7 @@ def get_obj_det_model_Drive():
         with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
             download_file_from_google_drive(cloud_model_location, f_checkpoint)
     
-    #config = GPT2Config()
+    config = GPT2Config()
     #config.pad_token_id = tokenizer.token_to_id('<pad>')
 
     ##model = GPT2LMHeadModel(config)
@@ -85,7 +85,7 @@ def get_obj_det_model_Drive():
     class KoGPT2Chat(LightningModule):
       def __init__(self):
           super(KoGPT2Chat, self).__init__()
-          self.kogpt2 = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
+          self.kogpt2 = GPT2LMHeadModel(config)
 
     model = KoGPT2Chat.load_from_checkpoint(f_checkpoint)    
     #checkpoint = model.state_dict()

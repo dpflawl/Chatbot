@@ -85,7 +85,7 @@ def get_obj_det_model_Drive():
           #torch.reshape(checkpoint[key], torch.Size([model_state_dict[key].shape]))
           #del checkpoint[key]
                 
-    model.load_state_dict(checkpoint, strict=False)
+    model.load_state_dict(checkpoint)
     #model.load_state_dict(f_checkpoint, strict=False)
     #model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint))
     model.eval()

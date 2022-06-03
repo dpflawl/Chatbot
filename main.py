@@ -119,7 +119,7 @@ def get_obj_det_model_Drive():
     return model
 
 
-if send_button:
+if send_button.onclick():
     st.session_state["input"] = ""
     tokenizer = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",
       bos_token='</s>', eos_token='</s>', unk_token='<unk>',

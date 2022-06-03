@@ -19,6 +19,9 @@ st.title("감정 모델 기반의 챗봇 서비스👾")
 
 user_input = st.text_input("You: ","안녕?", key="input")
 
+if 'input' not in st.session_state:
+  st.session_state['input'] = []
+
 if 'generated' not in st.session_state:
     st.session_state['generated'] = []
     st.session_state.chat_history_ids = None

@@ -82,8 +82,8 @@ def get_obj_det_model_Drive():
       if 'kogpt2.' in key:
           checkpoint[key.replace('kogpt2.', '')] = checkpoint[key]
           if key == "transformer.wte.weight" or key == "lm_head.weight":
-            torch.reshape(checkpoint[key], torch.Size([51200, 768]))
-          del checkpoint[key]
+            torch.reshape(checkpoint[key], torch.Size([model_state_dict.shape[0], model_state_dict.shape[1]]))
+          #del checkpoint[key]
                 
     model.load_state_dict(checkpoint, strict=False)
     #model.load_state_dict(f_checkpoint, strict=False)

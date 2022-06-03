@@ -75,20 +75,14 @@ def get_obj_det_model_Drive():
         with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
             download_file_from_google_drive(cloud_model_location, f_checkpoint)
     
-    config = GPT2Config()
+    #config = GPT2Config()
     #config.pad_token_id = tokenizer.token_to_id('<pad>')
 
     ##model = GPT2LMHeadModel(config)
     ###model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
-    class KoGPT2Chat(LightningModule):
-      def __init__(self, hparams, **kwargs):
-          super(KoGPT2Chat, self).__init__()
-          self.kogpt2 = GPT2LMHeadModel(config)
-
-    model = KoGPT2Chat.load_from_checkpoint(f_checkpoint)
-    '''
+   
     model_state_dict = model.state_dict()
-    #checkpoint = torch.load(f_checkpoint)
+    checkpoint = torch.load(f_checkpoint)
     
     for key in list(checkpoint.keys()):
       if 'kogpt2.' in key:
@@ -96,10 +90,17 @@ def get_obj_det_model_Drive():
           del checkpoint[key]
     #for key in list(checkpoint.keys()):     
     #  torch.reshape(checkpoint[key], (model_state_dict[key].shape[0], model_state_dict[key].shape[1]))          
+    class KoGPT2Chat(LightningModule):
+      def __init__(self, hparams, **kwargs):
+          super(KoGPT2Chat, self).__init__()
+          self.kogpt2 = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
+
+    model = KoGPT2Chat.load_from_checkpoint(f_checkpoint)
+      
     ###model.load_state_dict(checkpoint)
     #model.load_state_dict(f_checkpoint, strict=False)
     #model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint))
-    '''
+    
     model.eval()
     return model
 

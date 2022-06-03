@@ -4,7 +4,7 @@ import transformers
 from transformers import PreTrainedTokenizerFast
 import pandas as pd
 #from transformers import AutoModelForCausalLM, AutoTokenizer
-from transformers import GPT2Config, GPT2LMHeadModel
+from transformers import GPT2Config
 import torch
 from streamlit_chat import message
 import os
@@ -29,6 +29,23 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = []
 
+
+def requires_backends(obj, backends):
+    if not isinstance(backends, (list, tuple)):
+        backends = [backends]
+
+    name = obj.__name__ if hasattr(obj, "__name__") else obj.__class__.__name__
+    checks = (BACKENDS_MAPPING[backend] for backend in backends)
+    failed = [msg.format(name) for available, msg in checks if not available()]
+    if failed:
+        raise ImportError("".join(failed))    
+
+class GPT2LMHeadModel(metaclass=DummyObject):
+    _backends = ["torch"]
+
+    def __init__(self, *args, **kwargs):
+        requires_backends(self, ["torch"])    
+        
     
 import requests
 
@@ -78,7 +95,7 @@ def get_obj_det_model_Drive():
 
     ##model = GPT2LMHeadModel(config)
     ###model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
-    model = GPT2LMHeadModel.from_pretrained(f_checkpoint, local_files_only=True)
+    model = GPT2LMHeadModel.load_from_checkpoint(f_checkpoint)
     model_state_dict = model.state_dict()
     '''
     checkpoint = torch.load(f_checkpoint)

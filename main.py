@@ -17,7 +17,7 @@ from pathlib import Path
 st.title("감정 모델 기반의 챗봇 서비스👾")
     
 def get_text():
-    input_text = st.text_input("You: ","안녕하세요.", key="input")
+    input_text = st.text_input("You: ","안녕하세요. 반가워요!", key="input")
     return input_text 
 
 user_input = get_text()
@@ -79,9 +79,12 @@ def get_obj_det_model_Drive():
     checkpoint = torch.load(f_checkpoint)
     for key in list(checkpoint.keys()):
       if 'kogpt2.' in key:
+          if key == "kogpt2.transformer.wte.weight" or key == "kogpt2.lm_head.weight":
+            pass
           checkpoint[key.replace('kogpt2.', '')] = checkpoint[key]
           del checkpoint[key]
-    model.load_state_dict(checkpoint, strict=False)
+                
+    model.load_state_dict(checkpoint)
     #model.load_state_dict(f_checkpoint, strict=False)
     #model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint))
     model.eval()

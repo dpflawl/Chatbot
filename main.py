@@ -69,8 +69,8 @@ def get_obj_det_model_Drive():
     
     cloud_model_location = "1-DbUxDJROKYSDK-ltSouwnvVGCKOQJto" #kogpt module
     f_checkpoint = Path("KoGPT2ChatBot.pth")
-    #cloud_model_location = "1-A_prlbano0stKVdo4l1QjIk0LUiU5NZ"
-    #f_checkpoint = Path("KoGPT2ChatBot.pt")
+    #cloud_model_location = "1o4EDzLHkfqRI_jAtmrzRtOUBjw1iqeQv"
+    #f_checkpoint = Path("KoGPT2Chatbot.pkl")
     
     if not f_checkpoint.exists():
         with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):

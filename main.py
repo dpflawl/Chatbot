@@ -81,6 +81,7 @@ def get_obj_det_model_Drive():
     ##model = GPT2LMHeadModel(config)
     ###model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
     model = LightningModule.load_from_checkpoint(checkpoint_path=f_checkpoint)
+    '''
     model_state_dict = model.state_dict()
     #checkpoint = torch.load(f_checkpoint)
     
@@ -93,6 +94,7 @@ def get_obj_det_model_Drive():
     ###model.load_state_dict(checkpoint)
     #model.load_state_dict(f_checkpoint, strict=False)
     #model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint))
+    '''
     model.eval()
     return model
 

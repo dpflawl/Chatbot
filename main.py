@@ -80,11 +80,12 @@ def get_obj_det_model_Drive():
 
     ##model = GPT2LMHeadModel(config)
     ###model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
-    class PretrainModule(LightningModule):
-      def __init__(self):
-          self.model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
+    class KoGPT2Chat(LightningModule):
+      def __init__(self, hparams, **kwargs):
+          super(KoGPT2Chat, self).__init__()
+          self.kogpt2 = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
-    model = PretrainModule.load_from_checkpoint(checkpoint_path=f_checkpoint).model
+    model = KoGPT2Chat.load_from_checkpoint(checkpoint_path=f_checkpoint).kogpt2
     '''
     model_state_dict = model.state_dict()
     #checkpoint = torch.load(f_checkpoint)

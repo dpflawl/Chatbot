@@ -29,6 +29,35 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = []
 
+    
+BACKENDS_MAPPING = OrderedDict(
+    [
+        ("datasets", (is_datasets_available, DATASETS_IMPORT_ERROR)),
+        ("detectron2", (is_detectron2_available, DETECTRON2_IMPORT_ERROR)),
+        ("faiss", (is_faiss_available, FAISS_IMPORT_ERROR)),
+        ("flax", (is_flax_available, FLAX_IMPORT_ERROR)),
+        ("ftfy", (is_ftfy_available, FTFY_IMPORT_ERROR)),
+        ("pandas", (is_pandas_available, PANDAS_IMPORT_ERROR)),
+        ("phonemizer", (is_phonemizer_available, PHONEMIZER_IMPORT_ERROR)),
+        ("protobuf", (is_protobuf_available, PROTOBUF_IMPORT_ERROR)),
+        ("pyctcdecode", (is_pyctcdecode_available, PYCTCDECODE_IMPORT_ERROR)),
+        ("pytesseract", (is_pytesseract_available, PYTESSERACT_IMPORT_ERROR)),
+        ("scatter", (is_scatter_available, SCATTER_IMPORT_ERROR)),
+        ("pytorch_quantization", (is_pytorch_quantization_available, PYTORCH_QUANTIZATION_IMPORT_ERROR)),
+        ("sentencepiece", (is_sentencepiece_available, SENTENCEPIECE_IMPORT_ERROR)),
+        ("sklearn", (is_sklearn_available, SKLEARN_IMPORT_ERROR)),
+        ("speech", (is_speech_available, SPEECH_IMPORT_ERROR)),
+        ("tensorflow_probability", (is_tensorflow_probability_available, TENSORFLOW_PROBABILITY_IMPORT_ERROR)),
+        ("tf", (is_tf_available, TENSORFLOW_IMPORT_ERROR)),
+        ("timm", (is_timm_available, TIMM_IMPORT_ERROR)),
+        ("tokenizers", (is_tokenizers_available, TOKENIZERS_IMPORT_ERROR)),
+        ("torch", (is_torch_available, PYTORCH_IMPORT_ERROR)),
+        ("vision", (is_vision_available, VISION_IMPORT_ERROR)),
+        ("scipy", (is_scipy_available, SCIPY_IMPORT_ERROR)),
+        ("accelerate", (is_accelerate_available, ACCELERATE_IMPORT_ERROR)),
+    ]
+)
+
 
 def requires_backends(obj, backends):
     if not isinstance(backends, (list, tuple)):

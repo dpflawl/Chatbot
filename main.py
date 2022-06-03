@@ -122,10 +122,12 @@ if user_input:
     model = get_obj_det_model_Drive()
 
     with torch.no_grad():
-        new_user_input_ids = tokenizer.encode(user_input + tokenizer.eos_token, return_tensors='pt')
+        #new_user_input_ids = tokenizer.encode(user_input + tokenizer.eos_token, return_tensors='pt')
+        new_user_input_ids = tokenizer.encode(unk_token + user_input + tokenizer.eos_token, return_tensors='pt')
+        #tok.encode(U_TKN + q + SENT + sent + S_TKN + a)
         bot_input_ids = torch.cat([st.session_state.chat_history_ids, new_user_input_ids], dim=-1) if 'past' not in st.session_state else new_user_input_ids
         st.session_state.chat_history_ids = model.generate(bot_input_ids,
-                                                            max_length=128,
+                                                            max_length=32,
                                                             repetition_penalty=2.0,
                                                             pad_token_id=tokenizer.pad_token_id,
                                                             eos_token_id=tokenizer.eos_token_id,

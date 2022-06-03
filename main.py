@@ -16,7 +16,8 @@ from pytorch_lightning import LightningModule
 #st.write(os.getcwd())
 
 st.title("감정 모델 기반의 챗봇 서비스👾")
-    
+
+form = st.form(key='my_form')
 user_input = st.text_input("You: ","안녕?", key="input")
 send_button = st.form_submit_button("전송")
 

@@ -81,8 +81,7 @@ def get_obj_det_model_Drive():
     ##model = GPT2LMHeadModel(config)
     model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')   
     model_state_dict = model.state_dict()
-    checkpoint = model.state_dict()
-    ckpt = torch.load(checkpoint)
+    ckpt = torch.load(model_state_dict)
     print(ckpt.keys())
     
     class KoGPT2Chat(LightningModule):

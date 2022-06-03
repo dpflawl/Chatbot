@@ -28,10 +28,15 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = []
 
-my_file = "https://drive.google.com/file/d/1-EqYjXiygYvJkT6_4peMEN77apMODYA7/view?usp=sharing"
-    
 @st.cache
 def get_obj_det_model_Drive():
+    f_checkpoint = Path("/app/chatbot/KoGPT2Chatbot.pth")
+    
+    if not f_checkpoint.exists():
+        with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
+            from GD_download import download_file_from_google_drive
+            download_file_from_google_drive("https://drive.google.com/file/d/1-EqYjXiygYvJkT6_4peMEN77apMODYA7/view?usp=sharing", "KoGPT2Chatbot.pth")
+            
     #model = torch.load(f_checkpoint, map_location=device)
     model = GPT2LMHeadModel.load_state_dict(torch.load(my_file))
     model.eval()

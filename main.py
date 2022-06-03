@@ -75,13 +75,14 @@ def get_obj_det_model_Drive():
     #config = GPT2Config()
     #config.pad_token_id = tokenizer.token_to_id('<pad>')
 
-    model = GPT2LMHeadModel(config)
+    #model = GPT2LMHeadModel(config)
+    model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
     model_state_dict = model.state_dict()
     checkpoint = torch.load(f_checkpoint)
     for key in list(checkpoint.keys()):
       if 'kogpt2.' in key:
           checkpoint[key.replace('kogpt2.', '')] = checkpoint[key]
-          torch.reshape(checkpoint[key], torch.Size([model_state_dict[key].shape]))
+          #torch.reshape(checkpoint[key], torch.Size([model_state_dict[key].shape]))
           #del checkpoint[key]
                 
     model.load_state_dict(checkpoint, strict=False)

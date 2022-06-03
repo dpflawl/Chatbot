@@ -22,7 +22,7 @@ def get_text():
     return input_text 
 
 #input = st.text_input('입력:')
-use_input = get_text()
+user_input = get_text()
 
 if 'generated' not in st.session_state:
     st.session_state['generated'] = []

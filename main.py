@@ -15,7 +15,7 @@ from pytorch_lightning import LightningModule
                 
 #st.write(os.getcwd())
 
-st.title("감정 모델 기반의 챗봇 서비스👾")
+st.title("감정을 분석하고 위로해주는 챗봇👾")
 
 def get_text():
     input_text = st.text_input("You: ","안녕?", key="input")

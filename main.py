@@ -28,11 +28,12 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = []
 
+my_file = "https://drive.google.com/file/d/1-EqYjXiygYvJkT6_4peMEN77apMODYA7/view?usp=sharing"
     
 @st.cache
 def get_obj_det_model_Drive():
     #model = torch.load(f_checkpoint, map_location=device)
-    model = GPT2LMHeadModel.load_state_dict(torch.load("/content/drive/MyDrive/KoGPT2-chatbot/KoGPT2Chatbot.pth"))
+    model = GPT2LMHeadModel.load_state_dict(torch.load(my_file))
     model.eval()
     return model
 

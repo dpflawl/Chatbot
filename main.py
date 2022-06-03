@@ -79,11 +79,7 @@ def get_obj_det_model_Drive():
     checkpoint = torch.load(f_checkpoint)
     for key in list(checkpoint.keys()):
       if 'kogpt2.' in key:
-          if key == "kogpt2.transformer.wte.weight" or key == "kogpt2.lm_head.weight":
-            pname = key
-            pval = checkpoint[key]
-            checkpoint[pname] = pval.clone()
-          else:
+          if not key == "kogpt2.transformer.wte.weight" or key == "kogpt2.lm_head.weight":
             checkpoint[key.replace('kogpt2.', '')] = checkpoint[key]
           del checkpoint[key]
                 

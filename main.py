@@ -110,7 +110,7 @@ if user_input:
         #                                                    eos_token_id=tokenizer.eos_token_id,
         #                                                    bos_token_id=tokenizer.bos_token_id,
         #                                                    use_cache=True)
-        st.session_state.chat_history_ids = model(bot_input_ids)
+        st.session_state.chat_history_ids = model(bot_input_ids, return_dict=True)
         response = tokenizer.decode(st.session_state.chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True)       
         st.session_state.past.append(user_input)
         st.session_state.generated.append(response)

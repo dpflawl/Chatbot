@@ -73,7 +73,7 @@ def get_obj_det_model_Drive():
         with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
             download_file_from_google_drive(cloud_model_location, f_checkpoint)
     
-    model = GPT2LMHeadModel()
+    model = GPT2LMHeadModel
     model.load_state_dict(torch.load(f_checkpoint))
     #model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint), strict=False)
     model.eval()

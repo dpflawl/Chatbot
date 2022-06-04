@@ -1,0 +1,6 @@
+pandas
+pytorch_lightning==1.2.10
+torch
+numpy
+transformers==4.5.1
+konlpy

@@ -129,7 +129,7 @@ if user_input:
                                                             eos_token_id=tokenizer.eos_token_id,
                                                             bos_token_id=tokenizer.bos_token_id,
                                                             use_cache=True)
-        score = float(emo_model.predict(bot_input_ids))
+        score = float(emo_model.predict(new_user_input_ids))
         if (score > 0.9):
           emoji = "😁"
         elif (score > 0.8):

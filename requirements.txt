@@ -6,5 +6,6 @@ pyarrow
 pandas
 gdown
 pytorch_lightning
+konlpy
 transformers==4.17.0
 protobuf~=3.19.0

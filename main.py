@@ -129,7 +129,9 @@ if user_input:
                                                             eos_token_id=tokenizer.eos_token_id,
                                                             bos_token_id=tokenizer.bos_token_id,
                                                             use_cache=True)
-        score = float(emo_model.predict(new_user_input_ids))
+        encoded = [tokenizer.encode(user_input)] # 정수 인코딩
+        pad_new = tf.keras.preprocessing.sequence.pad_sequences(encoded, maxlen = len(encoded)) # 패딩
+        score = float(emo_model.predict(pad_new))
         if (score > 0.9):
           emoji = "😁"
         elif (score > 0.8):

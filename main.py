@@ -82,8 +82,7 @@ def get_obj_det_model_Drive():
     f_checkpoint = Path("KoGPT2Chatbot.pth")        
     # cloud_model_location = "17jWPP5pbhj67RqIuzIbuBnOznTgG2STy"
     # f_checkpoint = Path("model_-last.ckpt")
-    emo_cloud_model_location = "1SpKHGyaCnKaqpJs2Kbo-S9dvR9QQgghJ"
-    emo_model = tf.keras.models.load_model(emo_cloud_model_location)
+    emo_model = tf.keras.models.load_model('model/emotion_model.h5')
     if not f_checkpoint.exists():
         with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
             download_file_from_google_drive(cloud_model_location, f_checkpoint)

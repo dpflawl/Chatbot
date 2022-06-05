@@ -12,6 +12,9 @@ import requests
 from pathlib import Path
 from pytorch_lightning import LightningModule
 
+import tensorflow as tf
+import konlpy
+
                 
 #st.write(os.getcwd())
 
@@ -79,7 +82,8 @@ def get_obj_det_model_Drive():
     f_checkpoint = Path("KoGPT2Chatbot.pth")        
     # cloud_model_location = "17jWPP5pbhj67RqIuzIbuBnOznTgG2STy"
     # f_checkpoint = Path("model_-last.ckpt")
-    
+    emo_cloud_model_location = "1SpKHGyaCnKaqpJs2Kbo-S9dvR9QQgghJ"
+    emo_model = tf.keras.models.load_model(emo_cloud_model_location)
     if not f_checkpoint.exists():
         with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
             download_file_from_google_drive(cloud_model_location, f_checkpoint)
@@ -120,7 +124,8 @@ def get_obj_det_model_Drive():
     #model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint))
     
     model.eval()
-    return model
+    emo_model.eval()
+    return model, emo_model
 
 
 if user_input:
@@ -128,7 +133,7 @@ if user_input:
       bos_token='</s>', eos_token='</s>', unk_token='<unk>',
       pad_token='<pad>', mask_token='<mask>')
     #model = GPT2LMHeadModel.load_state_dict(torch.load("/app/chatbot/KoGPT2Chatbot.pth"))
-    model = get_obj_det_model_Drive()
+    model, emo_model = get_obj_det_model_Drive()
 
     with torch.no_grad():
         #new_user_input_ids = tokenizer.encode(user_input + tokenizer.eos_token, return_tensors='pt')
@@ -142,9 +147,24 @@ if user_input:
                                                             eos_token_id=tokenizer.eos_token_id,
                                                             bos_token_id=tokenizer.bos_token_id,
                                                             use_cache=True)
+        score = float(emo_model.predict(bot_input_ids))
+        if (score > 0.9):
+          emoji = "😁"
+        elif (score > 0.8):
+          emoji = "😀"
+        elif (score > 0.7):
+          emoji = "😊"
+        elif (score > 0.5):
+          emoji = "🙂"
+        elif (score > 0.4):
+          emoji = "😶"
+        elif (score > 0.3):
+          emoji = "😔"
+        else:
+          emoji = "😢"
         response = tokenizer.decode(st.session_state.chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True)       
         st.session_state.past.append(user_input)
-        st.session_state.generated.append(response)
+        st.session_state.generated.append(response+emoji)
 
 if st.session_state['generated']:
     for i in range(len(st.session_state['generated'])-1, -1, -1):

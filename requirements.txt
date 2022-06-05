@@ -1,6 +1,7 @@
 streamlit==0.84.0
 streamlit-chat==0.0.2.1
 torch==1.11.0
+tensorflow
 pyarrow
 pandas
 gdown

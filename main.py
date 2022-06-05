@@ -76,7 +76,7 @@ def save_response_content(response, destination):
                 f.write(chunk)
 
                 
-@st.cache
+@st.cache(allow_output_mutation=True)
 def get_obj_det_model_Drive():
     cloud_model_location = "1-EqYjXiygYvJkT6_4peMEN77apMODYA7"
     f_checkpoint = Path("KoGPT2Chatbot.pth")        

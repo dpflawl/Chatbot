@@ -123,7 +123,7 @@ def get_obj_det_model_Drive():
     #model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint))
     
     model.eval()
-    emo_model.eval()
+    #emo_model.eval()
     return model, emo_model
 
 

@@ -134,7 +134,7 @@ if user_input:
                                                             use_cache=True)
         encoded = [tokenizer.encode(user_input)] # 정수 인코딩
         pad_new = tf.keras.preprocessing.sequence.pad_sequences(encoded, maxlen = len(encoded)) # 패딩
-        emotion = emo_model(pad_new)
+        emotion = emo_model([pad_new])
         st.write(emotion[label])
         if emotion['label'] == "LABEL_0": #부정
           if emotion['score'] < 50:

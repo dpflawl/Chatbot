@@ -135,13 +135,13 @@ if user_input:
         encoded = [tokenizer.encode(user_input)] # 정수 인코딩
         pad_new = tf.keras.preprocessing.sequence.pad_sequences(encoded, maxlen = len(encoded)) # 패딩
         emotion = emo_model(user_input)
-        if emotion['label'] == "LABEL_0": #부정
-          if emotion['score'] < 50:
+        if emotion[0] == "LABEL_0": # 부정
+          if emotion[1] < 50: # 부정인 확률 (score)
             emoji = "😶"
           else:
             emoji = "😢"
-        else:
-          if emotion['score'] < 50:
+        else: #긍정
+          if emotion[1] < 50: # 긍정인 확률 (score)
             emoji = "🙂"
           else:
             emoji = "😄"

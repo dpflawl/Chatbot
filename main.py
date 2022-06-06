@@ -101,7 +101,7 @@ def get_obj_det_model_Drive():
     #for key in list(checkpoint.keys()):     
     #  torch.reshape(checkpoint[key], (model_state_dict[key].shape[0], model_state_dict[key].shape[1]))     
 
-    ###model.load_state_dict(checkpoint)
+    model.load_state_dict(checkpoint)
     #model.load_state_dict(f_checkpoint, strict=False)
     #model = GPT2LMHeadModel.load_state_dict(torch.load(f_checkpoint))
     
@@ -148,8 +148,7 @@ if user_input:
           emoji = "😢"
         response = tokenizer.decode(st.session_state.chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True)       
         st.session_state.past.append(user_input)
-        #st.session_state.generated.append(response+emoji)
-        st.session_state.generated.append(response)
+        st.session_state.generated.append(response+emoji)
 
 if st.session_state['generated']:
     for i in range(len(st.session_state['generated'])-1, -1, -1):

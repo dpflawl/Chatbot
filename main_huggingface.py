@@ -137,12 +137,12 @@ if user_input:
         emotion = emo_model(str(user_input))
         st.write(emotion)
         if emotion[0]['label'] == "LABEL_0": # 부정
-          if emotion[0]['score'] < 0.5: # 부정인 확률 (score)
+          if emotion[0]['score'] < 0.7: # 부정인 확률 (score)
             emoji = "😶"
           else:
             emoji = "😢"
         else: #긍정
-          if emotion[0]['score'] < 0.5: # 긍정인 확률 (score)
+          if emotion[0]['score'] < 0.7: # 긍정인 확률 (score)
             emoji = "🙂"
           else:
             emoji = "😄"

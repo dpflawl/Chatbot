@@ -123,7 +123,7 @@ if user_input:
         #tok.encode(U_TKN + q + SENT + sent + S_TKN + a)
         bot_input_ids = torch.cat([st.session_state.chat_history_ids, new_user_input_ids], dim=-1) if 'past' not in st.session_state else new_user_input_ids
         st.session_state.chat_history_ids = model.generate(bot_input_ids,
-                                                            max_length=32,
+                                                            max_length=64,
                                                             repetition_penalty=2.0,
                                                             pad_token_id=tokenizer.pad_token_id,
                                                             eos_token_id=tokenizer.eos_token_id,

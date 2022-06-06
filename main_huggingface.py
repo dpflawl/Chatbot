@@ -136,13 +136,13 @@ if user_input:
         pad_new = tf.keras.preprocessing.sequence.pad_sequences(encoded, maxlen = len(encoded)) # 패딩
         emotion = emo_model(str(user_input))
         st.write(str(user_input))
-        if emotion[0] == "LABEL_0": # 부정
-          if emotion[1] < 50: # 부정인 확률 (score)
+        if emotion['label'] == "LABEL_0": # 부정
+          if emotion['score'] < 50: # 부정인 확률 (score)
             emoji = "😶"
           else:
             emoji = "😢"
         else: #긍정
-          if emotion[1] < 50: # 긍정인 확률 (score)
+          if emotion['score'] < 50: # 긍정인 확률 (score)
             emoji = "🙂"
           else:
             emoji = "😄"
